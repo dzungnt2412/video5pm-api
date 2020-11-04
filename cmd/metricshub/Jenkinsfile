@@ -1,0 +1,130 @@
+#!/usr/bin/env groovy
+
+node {
+    // Clean workspace before doing anything
+    deleteDir()
+
+    try {
+        try {
+            // get deploy setting
+            deploySettings = getDeploySettings()
+        } catch(err) {
+            println(err.getMessage());
+            throw err
+        }
+
+        echo "Building..."
+
+        // Prepare stage: clone projects
+        stage ('Prepare') {
+            dir('lionnix-metrics-api') {
+                git(
+                    credentialsId: 'GitAccessId',
+                    branch: "${env.BRANCH_NAME}",
+                    url: 'git@gitlab.com:lionnix/lionnix-metrics-api.git'
+                )
+            }
+        }
+
+        // Build stage: build image then push to private registry. Only build on branch master
+        image = "${deploySettings.image_name}:${deploySettings.image_tag}"
+        stage ('Build') {
+            if (deploySettings.branch == 'master' || deploySettings.branch == 'dev') {
+                dir('lionnix-metrics-api') {
+                    withDockerRegistry([
+                        credentialsId: 'docker-registry-credentials',
+                        url: "${deploySettings.private_registry_address}"]) {
+                        sh "docker build -t ${image} -f ${deploySettings.dockerfile_name} --build-arg BIN=${deploySettings.cmd_bin_dir} ."
+                        sh "docker push ${image}"
+                    }
+                }
+            } else {
+                echo "Build only available for dev and staging branch. Skip."
+                currentBuild.result = 'FAILED'
+            }
+        }
+
+        // Deploy stage: deploy docker image to k8s
+        stage ('Deploy') {
+            deployTag = "${deploySettings.image_tag}"
+            if (deploySettings.branch == 'master') {
+                appEnv = "staging"
+            }
+
+            if (!deployTag) {
+                currentBuild.result = 'FAILED'
+                echo "Unable to get deploy tag or this branch is not allowed to deploy. Stop."
+            }
+
+            dir('lionnix-metrics-api') {
+                // use same namespace on staging/dev
+                sh """
+                    KUBECONFIG=${deploySettings.kube_config} helm upgrade --install -f ${deploySettings.helm_values_file} ${deploySettings.helm_release} --tls --tls-cert ${deploySettings.tls_cert} --tls-key ${deploySettings.tls_key} --tls-ca-cert ${deploySettings.tls_ca_cert} --set image.tag=${deployTag},app.namespace=${deploySettings.namespace} helm_chart
+
+                    KUBECONFIG=${deploySettings.kube_config} kubectl -n ${deploySettings.namespace} rollout status deployment ${deploySettings.service_name}
+                """
+            }
+        }
+
+        stage('Remove image') {
+            sh "docker rmi ${image}"
+        }
+
+        stage ('Clean') {
+            deleteDir()
+        }
+
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        throw err
+    }
+}
+
+def getDeploySettings() {
+    def deploySettings = [:]
+
+    cmdBinDir = "metricshub"
+    dockerImageName = "registry.lionnix.net/metrics/metrics-api"
+    serviceName = "metrics-api"
+    namespace = "metrics"
+
+    // end fill args
+    privateRegistryAddress = "https://registry.lionnix.net" // private registry address
+    branchName = env.BRANCH_NAME // current branch name of project
+    buildNumber = env.BUILD_NUMBER // current build number
+    dockerfileName = "Dockerfile"
+
+    if (branchName == 'master') {
+        // deploy code on master branch to master
+        helmValueFile = "default.values.prod.yaml"
+        kubeConfig = "/var/lib/jenkins/.kube/config"
+        dockerImageTag = "release-${buildNumber}"
+
+    }
+
+    // docker image info to build
+    deploySettings['private_registry_address'] = privateRegistryAddress
+    deploySettings['branch'] = branchName
+    deploySettings['dockerfile_name'] = dockerfileName
+    deploySettings['image_tag'] = dockerImageTag
+    deploySettings['image_name'] = dockerImageName
+    deploySettings['cmd_bin_dir'] = cmdBinDir
+
+    // k8s/helm info for deployment
+    deploySettings['helm_release'] = serviceName
+    deploySettings['helm_values_file'] = "cmd/${cmdBinDir}/${helmValueFile}"
+    deploySettings['kube_config'] = kubeConfig
+    deploySettings['namespace'] = namespace
+
+    // helm tls
+    if (branchName == 'master') {
+        deploySettings['tls_cert'] = '/var/lib/jenkins/.helm/tls/lionnix-prod/helm.cert.pem'
+        deploySettings['tls_key'] = '/var/lib/jenkins/.helm/tls/lionnix-prod/helm.key.pem'
+        deploySettings['tls_ca_cert'] = '/var/lib/jenkins/.helm/tls/lionnix-prod/ca.cert.pem'
+    }
+
+    // app name
+    deploySettings['service_name'] = serviceName
+
+    return deploySettings
+}
