@@ -1,7 +1,7 @@
 package v1
 
 import (
-	"lionnix-metrics-api/models/services"
+	"video5pm-api/models/services"
 	"net/http"
 	"strconv"
 

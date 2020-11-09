@@ -1,10 +1,10 @@
 package v1
 
 import (
-	"lionnix-metrics-api/core/constants"
-	"lionnix-metrics-api/core/utils"
-	"lionnix-metrics-api/models/services"
 	"net/http"
+	"video5pm-api/core/constants"
+	"video5pm-api/core/utils"
+	"video5pm-api/models/services"
 
 	"github.com/gin-gonic/gin"
 )
@@ -47,13 +47,6 @@ func LoginHeader(authService *services.AuthService, featureService *services.Fea
 		features := featureService.GetFeaturesByUserID(user.ID)
 		references := featureService.GetListReferences(features)
 
-		if len(features) < 1 {
-			c.JSON(http.StatusUnauthorized, gin.H{
-				"message": "No access permitted",
-			})
-			return
-		}
-
 		token, err := utils.GenerateToken(user, groups, references, secretKey)
 
 		if err != nil {
@@ -68,7 +61,6 @@ func LoginHeader(authService *services.AuthService, featureService *services.Fea
 		c.JSON(http.StatusOK, gin.H{
 			"message":   "Success",
 			"username":  user.UserName,
-			"fullname":  user.FullName,
 			"menuitems": features,
 		})
 	}

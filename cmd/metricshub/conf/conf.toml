@@ -1,10 +1,10 @@
 [mysql]
 host = "127.0.0.1"
-port = 3308
+port = 3306
 protocol = "tcp"
-username = "scn_dev"
-password = "aLt*D2K}DwP)Q[Y+"
-database = "lionnix_dev"
+username = "root"
+password = "123qweAS"
+database = "video5pm"
 charset = "utf8"
 parse_time = true
 

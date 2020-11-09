@@ -17,11 +17,11 @@ node {
 
         // Prepare stage: clone projects
         stage ('Prepare') {
-            dir('lionnix-metrics-api') {
+            dir('video5pm-api') {
                 git(
                     credentialsId: 'GitAccessId',
                     branch: "${env.BRANCH_NAME}",
-                    url: 'git@gitlab.com:lionnix/lionnix-metrics-api.git'
+                    url: 'git@gitlab.com:lionnix/video5pm-api.git'
                 )
             }
         }
@@ -30,7 +30,7 @@ node {
         image = "${deploySettings.image_name}:${deploySettings.image_tag}"
         stage ('Build') {
             if (deploySettings.branch == 'master' || deploySettings.branch == 'dev') {
-                dir('lionnix-metrics-api') {
+                dir('video5pm-api') {
                     withDockerRegistry([
                         credentialsId: 'docker-registry-credentials',
                         url: "${deploySettings.private_registry_address}"]) {
@@ -56,7 +56,7 @@ node {
                 echo "Unable to get deploy tag or this branch is not allowed to deploy. Stop."
             }
 
-            dir('lionnix-metrics-api') {
+            dir('video5pm-api') {
                 // use same namespace on staging/dev
                 sh """
                     KUBECONFIG=${deploySettings.kube_config} helm upgrade --install -f ${deploySettings.helm_values_file} ${deploySettings.helm_release} --tls --tls-cert ${deploySettings.tls_cert} --tls-key ${deploySettings.tls_key} --tls-ca-cert ${deploySettings.tls_ca_cert} --set image.tag=${deployTag},app.namespace=${deploySettings.namespace} helm_chart

@@ -4,18 +4,18 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"lionnix-metrics-api/core/utils"
-	"lionnix-metrics-api/pkg/database"
-	"lionnix-metrics-api/pkg/logger"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
+	"video5pm-api/core/utils"
+	"video5pm-api/pkg/database"
+	"video5pm-api/pkg/logger"
 
 	"github.com/jinzhu/gorm"
 	"github.com/spf13/viper"
 
-	"lionnix-metrics-api/cmd/metricshub/api"
+	"video5pm-api/cmd/metricshub/api"
 )
 
 var (

@@ -2,8 +2,8 @@ package v1
 
 import (
 	"fmt"
-	"lionnix-metrics-api/models/services"
 	"net/http"
+	"video5pm-api/models/services"
 
 	"github.com/gin-gonic/gin"
 )
