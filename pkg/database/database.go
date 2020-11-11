@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"github.com/spf13/viper"
-	"lionnix-metrics-api/pkg/logger"
+	"video5pm-api/pkg/logger"
 	"strings"
 
 	"github.com/jinzhu/gorm"

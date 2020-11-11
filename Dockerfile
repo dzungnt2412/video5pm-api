@@ -2,8 +2,8 @@ FROM golang:1.13.3 as builder
 ARG BIN
 ENV BIN_CMD_DIR ${BIN}
 
-COPY . /go/src/lionnix-metrics-api
-WORKDIR /go/src/lionnix-metrics-api
+COPY . /go/src/video5pm-api
+WORKDIR /go/src/video5pm-api
 
 RUN make native BIN=$BIN_CMD_DIR
 RUN mkdir /app && cp -r dist/linux-amd64/$BIN_CMD_DIR/* /app

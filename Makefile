@@ -6,7 +6,7 @@ BIN :=
 # Enable CGO to build lib C
 CGO := 0
 # This repo's root import path (under GOPATH).
-PKG := lionnix-metrics-api
+PKG := video5pm-api
 
 SHELL ::= /bin/bash
 
@@ -72,7 +72,7 @@ _build:
 	go build -ldflags "$(LDFLAGS)" -o "$(OUTPUTDIR)/bin/$(BINNAME)" "$(CMDPKG)/$(BIN)"
 	@echo "[build] done"
 
-_post_buid: $(GOPATH)/src/lionnix-metrics-api/templates/run.sh.in
+_post_buid: $(GOPATH)/src/video5pm-api/templates/run.sh.in
 	$(eval OUTPUTDIR := $(DISTDIR)/$(GOOS)-$(GOARCH)/$(BIN))
 	$(eval BINNAME := $(shell basename $(BIN)))
 	@echo "[post_build] ..."
@@ -81,7 +81,7 @@ _post_buid: $(GOPATH)/src/lionnix-metrics-api/templates/run.sh.in
 	@sed \
 		-e 's|ARG_APP_PID_NAME|$(BINNAME)-$(VERSION)|g' \
 		-e 's|ARG_APP_BIN_NAME|$(BINNAME)|g' \
-		$(GOPATH)/src/lionnix-metrics-api/templates/run.sh.in > "$(OUTPUTDIR)/run.sh"
+		$(GOPATH)/src/video5pm-api/templates/run.sh.in > "$(OUTPUTDIR)/run.sh"
 	@chmod +x "$(OUTPUTDIR)/run.sh"
 	@echo "copied run script file"
 	@mkdir -p "$(OUTPUTDIR)/conf"

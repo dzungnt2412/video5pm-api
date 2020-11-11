@@ -5,9 +5,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"strings"
-	"lionnix-metrics-api/core/constants"
-	"lionnix-metrics-api/core/utils"
-	"lionnix-metrics-api/pkg/logger"
+	"video5pm-api/core/constants"
+	"video5pm-api/core/utils"
+	"video5pm-api/pkg/logger"
 )
 
 // MiddlewareJWT is jwt middleware

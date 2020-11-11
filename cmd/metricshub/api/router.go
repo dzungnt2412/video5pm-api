@@ -46,7 +46,8 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 		apiv1.GET("/shop", v1.ShopPoint(userService))
 		apiv1.POST("/package/update", v1.UpdateUserPackage(packageService))
 		apiv1.POST("/package/updateVn", v1.UpdateUserVnPackage(packageService))
-		apiv1.POST("/create-video-preview-1", v1.CreateVideoPreview1(audioService, videoService))
+		apiv1.POST("/create-video-preview", v1.CreateVideoPreview(audioService, videoService))
+		apiv1.POST("/upload-video", v1.UploadVideo(audioService, videoService))
 	}
 
 	return r

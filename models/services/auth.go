@@ -1,8 +1,8 @@
 package services
 
 import (
-	"lionnix-metrics-api/models/entity"
-	"lionnix-metrics-api/pkg/logger"
+	"video5pm-api/models/entity"
+	"video5pm-api/pkg/logger"
 
 	"github.com/jinzhu/gorm"
 )

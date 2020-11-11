@@ -2,7 +2,7 @@ package services
 
 import (
 	"github.com/jinzhu/gorm"
-	"lionnix-metrics-api/models/entity"
+	"video5pm-api/models/entity"
 )
 
 func NewGroupService(db *gorm.DB) *GroupService {

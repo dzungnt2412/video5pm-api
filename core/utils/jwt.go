@@ -1,10 +1,10 @@
 package utils
 
 import (
-	"lionnix-metrics-api/core/constants"
-	"lionnix-metrics-api/models/entity"
 	"strings"
 	"time"
+	"video5pm-api/core/constants"
+	"video5pm-api/models/entity"
 
 	"github.com/dgrijalva/jwt-go"
 )
@@ -16,9 +16,6 @@ func GenerateToken(u *entity.User, groups []int64, references []string, secretKe
 
 	claims := jwt.MapClaims{}
 	claims["user_id"] = u.ID
-	claims["user_role"] = u.Role
-	claims["groups"] = groups
-	claims["references"] = references
 	claims["iss"] = constants.JWT_ISSUER
 	claims["exp"] = exp
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

@@ -1,8 +1,9 @@
 package services
 
 import (
+	"video5pm-api/models/entity"
+
 	"github.com/jinzhu/gorm"
-	"lionnix-metrics-api/models/entity"
 )
 
 func NewPackageService(db *gorm.DB) *PackageService {
@@ -17,7 +18,6 @@ type PackageService struct {
 func (c *PackageService) UpdateUserPackage(uid, pid int64) error {
 	var user entity.User
 	c.db.First(&user, uid)
-	user.PackageID = pid
 	err := c.db.Save(&user).Error
 
 	return err
@@ -27,7 +27,6 @@ func (c *PackageService) UpdateUserPackage(uid, pid int64) error {
 func (c *PackageService) UpdateUserVnPackage(uid, pid int64) error {
 	var user entity.User
 	c.db.First(&user, uid)
-	user.PackageVnID = pid
 	err := c.db.Save(&user).Error
 
 	return err

@@ -1,6 +1,6 @@
 package entity
 
-import "lionnix-metrics-api/pkg/database"
+import "video5pm-api/pkg/database"
 
 //Group - model group
 type Group struct {
