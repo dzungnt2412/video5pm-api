@@ -37,6 +37,8 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 
 	//auth
 	r.POST("/auth", v1.LoginHeader(authService, featureService, groupService, secretKey))
+	r.POST("/create-video-preview", v1.CreateVideoPreview(audioService, videoService))
+	r.POST("/upload-video", v1.UploadVideo(audioService, videoService))
 
 	//group
 	apiv1 := r.Group("/video5m/v1")
@@ -46,8 +48,6 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 		apiv1.GET("/shop", v1.ShopPoint(userService))
 		apiv1.POST("/package/update", v1.UpdateUserPackage(packageService))
 		apiv1.POST("/package/updateVn", v1.UpdateUserVnPackage(packageService))
-		apiv1.POST("/create-video-preview", v1.CreateVideoPreview(audioService, videoService))
-		apiv1.POST("/upload-video", v1.UploadVideo(audioService, videoService))
 	}
 
 	return r

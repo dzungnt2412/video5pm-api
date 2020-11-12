@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -17,6 +18,7 @@ func UploadVideo(audioService *services.AudioService, videoService *services.Vid
 	fn := func(c *gin.Context) {
 		VideoID := c.PostForm("video_id")
 		l := c.PostForm("length")
+
 		Length, err := time.ParseDuration(l + "s")
 
 		// if err != nil {
@@ -27,6 +29,13 @@ func UploadVideo(audioService *services.AudioService, videoService *services.Vid
 		// 	return
 		// }
 
+		if l == "0" {
+			c.JSON(http.StatusBadRequest, gin.H{
+				"message": "length is required",
+			})
+			c.Abort()
+			return
+		}
 		if len(VideoID) < 1 {
 			c.JSON(http.StatusBadRequest, gin.H{
 				"message": "VideoID is required",
@@ -64,6 +73,8 @@ func UploadVideo(audioService *services.AudioService, videoService *services.Vid
 			c.Abort()
 			return
 		}
+
+		fmt.Print("done")
 		videoID, _ := strconv.ParseInt(VideoID, 10, 64)
 		video, err := videoService.FindVideo(videoID)
 		if err != nil {
@@ -109,7 +120,7 @@ func UploadVideo(audioService *services.AudioService, videoService *services.Vid
 		}
 
 		c.JSON(http.StatusOK, gin.H{
-			"status": new_video,
+			"video": new_video,
 		})
 	}
 

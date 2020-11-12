@@ -1,9 +1,9 @@
 package v1
 
 import (
-	"video5pm-api/models/services"
 	"net/http"
 	"strconv"
+	"video5pm-api/models/services"
 
 	"github.com/gin-gonic/gin"
 )

@@ -59,9 +59,8 @@ func LoginHeader(authService *services.AuthService, featureService *services.Fea
 		c.Header("Authorization", constants.TOKEN_PREFIX+token)
 
 		c.JSON(http.StatusOK, gin.H{
-			"message":   "Success",
-			"username":  user.UserName,
-			"menuitems": features,
+			"access_token": token,
+			"user":         user,
 		})
 	}
 
