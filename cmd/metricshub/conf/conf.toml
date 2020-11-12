@@ -3,8 +3,8 @@ host = "127.0.0.1"
 port = 3306
 protocol = "tcp"
 username = "root"
-password = "123qweAS"
-database = "video5pm"
+password = "123456a@"
+database = "video5m"
 charset = "utf8"
 parse_time = true
 
