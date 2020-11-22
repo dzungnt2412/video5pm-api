@@ -1,17 +1,9 @@
 [mysql]
-host = "103.139.102.172"
+host = "127.0.0.1"
 port = 3306
 protocol = "tcp"
-username = "scn_dev"
-password = "aLt*D2K}DwP)Q[Y+"
-database = "lionnix_dev"
+username = "root"
+password = "123qweAS"
+database = "video5pm"
 charset = "utf8"
 parse_time = true
-
-[server]
-run_mode = "release"
-host = "127.0.0.1"
-port = 6565
-read_timeout = 60
-write_timeout = 60
-secret_key = "L!0nN!X@123"

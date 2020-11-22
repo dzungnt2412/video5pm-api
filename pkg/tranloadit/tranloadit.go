@@ -164,6 +164,7 @@ func CreateAudio(listAudio []string) string {
 	// Start the Assembly
 	info, err := client.StartAssembly(context.Background(), assembly)
 	if err != nil {
+		fmt.Println(err)
 		panic(err)
 	}
 
@@ -173,6 +174,7 @@ func CreateAudio(listAudio []string) string {
 	// has ended.
 	info, err = client.WaitForAssembly(context.Background(), info)
 	if err != nil {
+		fmt.Println(err)
 		panic(err)
 	}
 
@@ -213,7 +215,7 @@ func Concatenate_video(video_sentence string, video_sentence_length time.Duratio
 
 	fmt.Println(int64(video_sentence_length.Milliseconds()))
 	fmt.Println(int64(video_preview_length.Milliseconds()))
-	fmt.Println(int64(length.Milliseconds()))
+	fmt.Println(strconv.FormatInt(int64(lengthLayout.Seconds()), 10))
 
 	if int64(lengthLayout.Milliseconds()) > 500 {
 		mergedJson := `{

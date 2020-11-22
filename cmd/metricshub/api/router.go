@@ -2,7 +2,6 @@ package api
 
 import (
 	v1 "video5pm-api/cmd/metricshub/api/v1"
-	"video5pm-api/core/middleware"
 	"video5pm-api/models/services"
 
 	"github.com/gin-contrib/cors"
@@ -26,29 +25,12 @@ func InitRouter(mysqlConn *gorm.DB) *gin.Engine {
 
 	gin.SetMode(viper.GetString("server.run_mode"))
 
-	secretKey := viper.GetString("server.secret_key")
-	userService := services.NewUserService(mysqlConn)
-	authService := services.NewAuthService(mysqlConn)
-	packageService := services.NewPackageService(mysqlConn)
-	featureService := services.NewFeatureService(mysqlConn)
-	groupService := services.NewGroupService(mysqlConn)
 	audioService := services.NewAudioService(mysqlConn)
 	videoService := services.NewVideoService(mysqlConn)
 
 	//auth
-	r.POST("/auth", v1.LoginHeader(authService, featureService, groupService, secretKey))
 	r.POST("/create-video-preview", v1.CreateVideoPreview(audioService, videoService))
 	r.POST("/upload-video", v1.UploadVideo(audioService, videoService))
-
-	//group
-	apiv1 := r.Group("/video5m/v1")
-	apiv1.Use(middleware.MiddlewareJWT(secretKey))
-	{
-		apiv1.GET("/user", v1.FindUser(userService))
-		apiv1.GET("/shop", v1.ShopPoint(userService))
-		apiv1.POST("/package/update", v1.UpdateUserPackage(packageService))
-		apiv1.POST("/package/updateVn", v1.UpdateUserVnPackage(packageService))
-	}
 
 	return r
 }

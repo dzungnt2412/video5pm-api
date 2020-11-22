@@ -5,6 +5,7 @@ go 1.14
 require (
 	github.com/Masterminds/semver v1.5.0 // indirect
 	github.com/Masterminds/vcs v1.13.1 // indirect
+	github.com/alfg/mp4 v0.0.0-20200917033056-6857ee13db2a
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/gin-contrib/cors v1.3.1
@@ -15,6 +16,7 @@ require (
 	github.com/hajimehoshi/go-mp3 v0.3.1 // indirect
 	github.com/hashicorp/consul v1.8.3 // indirect
 	github.com/hashicorp/consul/api v1.6.0
+	github.com/jfbus/mp4 v0.0.0-20150401112544-b5bc0819ce33 // indirect
 	github.com/jinzhu/gorm v1.9.15
 	github.com/jmank88/nuts v0.4.0 // indirect
 	github.com/nightlyone/lockfile v1.0.0 // indirect

@@ -2,6 +2,9 @@
 ## explicit
 # github.com/Masterminds/vcs v1.13.1
 ## explicit
+# github.com/alfg/mp4 v0.0.0-20200917033056-6857ee13db2a
+## explicit
+github.com/alfg/mp4/atom
 # github.com/armon/go-metrics v0.3.4
 github.com/armon/go-metrics
 # github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -75,6 +78,8 @@ github.com/hashicorp/hcl/json/scanner
 github.com/hashicorp/hcl/json/token
 # github.com/hashicorp/serf v0.9.3
 github.com/hashicorp/serf/coordinate
+# github.com/jfbus/mp4 v0.0.0-20150401112544-b5bc0819ce33
+## explicit
 # github.com/jinzhu/gorm v1.9.15
 ## explicit
 github.com/jinzhu/gorm
