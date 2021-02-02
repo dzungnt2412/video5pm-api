@@ -1,6 +1,36 @@
 1
-00:00:01,000 --> 00:00:02,176
-Một hai ba
+00:00:01,000 --> 00:00:08,755
+Kết quả khảo sát gần 130,000 doanh nghiệp do Bộ Kế hoạch và Đầu tư thực hiện vào tháng 4/2020 cho thấy
 2
-00:00:02,176 --> 00:00:04,352
- Một hai ba
+00:00:08,755 --> 00:00:13,125
+  Khoảng 86% doanh nghiệp bị ảnh hưởng tiêu cực bởi dịch Covid-19
+3
+00:00:13,125 --> 00:00:21,208
+  Doanh thu quý I năm 2020 của các doanh nghiệp giảm mạnh xuống còn 74,1% so với cùng kỳ năm 2019
+4
+00:00:21,208 --> 00:00:28,279
+  Khó khăn về thị trường, nguồn thu, dòng tiền đã khiến nhiều doanh nghiệp buộc phải sử dụng các biện pháp liên quan đến lao động
+5
+00:00:28,279 --> 00:00:32,319
+ gần 30% doanh nghiệp áp dụng giải pháp cắt giảm lao động
+6
+00:00:32,319 --> 00:00:39,384
+ trên 21% doanh nghiệp cho lao động nghỉ không lương và gần 19% doanh nghiệp giảm lương lao động
+7
+00:00:39,384 --> 00:00:48,472
+ Tại Việt Nam, các doanh nghiệp vừa và nhỏ chiếm tới 98% tổng số doanh nghiệp trên toàn quốc, đóng góp 29% ngân sách quốc gia
+8
+00:00:48,472 --> 00:00:60,593
+  Theo đánh giá của các chuyên gia kinh tế, cộng đồng SME là đối tượng bị tổn thương nhiều nhất bởi đại dịch với nguy cơ phá sản lớn, tuy nhiên, đây cũng là nhóm doanh nghiệp dễ phục hồi nhất do sở hữu những lợi thế riêng
+9
+00:00:60,593 --> 00:01:63,629
+  Theo đó, việc vượt qua khó khăn, tận dụng cơ hội
+10
+00:01:63,629 --> 00:01:71,705
+ và tìm hướng đi mới cho hoạt động sản xuất để biến “nguy” thành “cơ” là bước đi cần thiết để SME “bật dậy” sau dịch COVID-19
+11
+00:01:71,705 --> 00:01:81,804
+ Với phương châm “trong cái khó, ló cái khôn”, Angel hack nhận định đây chính là thời điểm vàng để cộng đồng công nghệ và khởi nghiệp trong lĩnh vực trí tuệ nhân tạo tại Việt Nam
+12
+00:01:81,804 --> 00:01:89,889
+  cùng chung tay, tập trung vận dụng sức sáng tạo và tiềm năng phát triển vô hạn để kiến tạo những tác động tích cực cho nền kinh tế và xã hội nước nhà
